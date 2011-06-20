@@ -1,9 +1,6 @@
 package com.porty.swing.table;
 
 import com.porty.swing.util.TestDataGenerator;
-import com.westernasset.gso.uicore.dynamicui.DynamicTable;
-import com.westernasset.gso.uicore.framework.table.binding.ReflectionBindingProvider;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
@@ -33,26 +30,6 @@ public class TestBeanPropertyTableModel extends TestCase {
 
                 long t1 = System.currentTimeMillis();
                 model.setData(getDataSet(1000));
-                long t2 = System.currentTimeMillis();
-                System.out.println("populate time: " + (t2 - t1) );
-            }
-        });
-        Thread.sleep(2000);
-        SwingUtilities.invokeLater(new Runnable() {
-
-            @Override
-            public void run() {
-                JFrame f = new JFrame("TestDynBB");
-                f.setSize(600, 400);
-                DynamicTable<TestTableBean> table = new DynamicTable<TestTableBean>();
-                table.setDataClass(TestTableBean.class);
-                // table.setBindingProvider(new ReflectionBindingProvider<TestTableBean>(TestTableBean.class));
-                table.setHorizontalScrollEnabled(true);
-                f.add(new JScrollPane(table));
-                f.setVisible(true);
-
-                long t1 = System.currentTimeMillis();
-                table.setData(getDataSet(1000));
                 long t2 = System.currentTimeMillis();
                 System.out.println("populate time: " + (t2 - t1) );
             }
