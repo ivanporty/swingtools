@@ -1,23 +1,25 @@
 package demo.table;
 
+import com.porty.swing.table.BaseTable;
 import com.porty.swing.table.BeanPropertyTableModel;
 import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
 /**
- * Demoes usage of bean property table model.
+ * Demoes usage of the advanced version of table, BaseTable.
+ *
  * @author iportyankin
  */
-public class SimpleReflectionTable extends JFrame {
+public class AdvancedTableDemo extends JFrame {
 
-    public SimpleReflectionTable() {
-        super("Bean Property Table Model Demo");
+    public AdvancedTableDemo() {
+        super("Advanced Table Demo");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(600, 300);
-        final JTable table = new JTable();
+        final BaseTable table = new BaseTable();
+        table.setFilterHeaderEnabled(true);
         add(new JScrollPane(table));
         BeanPropertyTableModel<TableBean> model = new BeanPropertyTableModel<TableBean>(TableBean.class);
         model.setOrderedProperties(Arrays.asList("name","surname","date"));
@@ -31,9 +33,8 @@ public class SimpleReflectionTable extends JFrame {
 
             @Override
             public void run() {
-                new SimpleReflectionTable();
+                new AdvancedTableDemo();
             }
         });
     }
-
 }
