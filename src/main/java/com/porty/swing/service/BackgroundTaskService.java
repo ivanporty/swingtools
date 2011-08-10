@@ -1,5 +1,6 @@
 package com.porty.swing.service;
 
+import java.awt.Component;
 import javax.swing.SwingWorker;
 
 /**
@@ -20,4 +21,12 @@ public interface BackgroundTaskService {
      * @param work Code to execute on background thread.
      */
     void execute(Runnable work);
+
+    /**
+     * Executes runnable showing the progress bar with the message until the task is complete.
+     * @param work Work to be executed.
+     * @param message Message to be shown
+     * @param components Components to be disabled while task is executing
+     */
+    void executeIndeterminate(Runnable work, String message, Component... components);
 }
