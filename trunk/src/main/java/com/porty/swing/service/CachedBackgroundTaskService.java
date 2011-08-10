@@ -5,10 +5,10 @@ import java.util.concurrent.Executors;
 import javax.swing.SwingWorker;
 
 /**
- * 
+ * Background task factory which executes threads using the cached pool of threads.
  * @author iportyankin
  */
-public class CachedBackgroundTaskService implements BackgroundTaskService {
+public class CachedBackgroundTaskService extends AbstractBackgroundTaskService {
 
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
