@@ -55,11 +55,9 @@ public class TestBackgroundTaskService extends TestCase {
 
         Pause.pause(3000);
 
-        // run the quick
+        // run the quick - appear and disappear, hard to test
         frameFixture.button("runQuick").click();
         Pause.pause(50);
-        // this will not show the UI since it won't start yet
-        // assertNull(frameFixture.dialog());
 
         Pause.pause(5000);
     }

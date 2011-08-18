@@ -3,12 +3,8 @@ package com.porty.swing.service;
 import com.porty.swing.dialog.BlockingProgressDialog;
 import com.porty.swing.util.WindowUtils;
 import java.awt.Component;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.SwingUtilities;
 
 /**
@@ -20,8 +16,8 @@ import javax.swing.SwingUtilities;
 public abstract class AbstractBackgroundTaskService implements BackgroundTaskService {
 
     @Override
-    public void executeIndeterminate(final Runnable work, String message, final Component... components) {
-        final Future<Component> progressTask = createGenericProgressBarTask(message);
+    public void executeIndeterminate(final Runnable work, final String message, final Component... components) {
+        final List<Component> uiProgressComponent = new ArrayList<Component>(1);
         // disable the components
         SwingUtilities.invokeLater(new Runnable() {
 
@@ -32,6 +28,8 @@ public abstract class AbstractBackgroundTaskService implements BackgroundTaskSer
                     for (Component next : components) {
                         next.setEnabled(false);
                     }
+                    // create a progress component
+                    uiProgressComponent.add(createProgressComponent(message));
                 }
             }
         });
@@ -42,8 +40,6 @@ public abstract class AbstractBackgroundTaskService implements BackgroundTaskSer
                 try {
                     work.run();
                 } finally {
-                    // hide the progress in any case
-                    finishGenericProgressBarTask(progressTask);
                     // enable the components back
                     SwingUtilities.invokeLater(new Runnable() {
 
@@ -55,6 +51,8 @@ public abstract class AbstractBackgroundTaskService implements BackgroundTaskSer
                                     next.setEnabled(true);
                                 }
                             }
+                            // dispose progress component
+                            destroyProgressComponent(uiProgressComponent.get(0));
                         }
                     });
                 }
@@ -62,41 +60,6 @@ public abstract class AbstractBackgroundTaskService implements BackgroundTaskSer
         };
         // execute proxy with actual work
         execute(proxy);
-    }
-
-    private Future<Component> createGenericProgressBarTask(final String message) {
-        // component work may not even be created when task finishes
-        Callable<Component> uiWork = new Callable<Component>() {
-
-            @Override
-            public Component call() throws Exception {
-                return createProgressComponent(message);
-            }
-        };
-        final FutureTask futureTask = new FutureTask(uiWork);
-        SwingUtilities.invokeLater(futureTask);
-
-        return futureTask;
-    }
-
-    private void finishGenericProgressBarTask(Future<Component> progressTask) {
-        try {
-            // ui is ready
-            final Component c = progressTask.get();
-            // destroy on UI thread
-            SwingUtilities.invokeLater(new Runnable() {
-
-                @Override
-                public void run() {
-                    destroyProgressComponent(c);
-                }
-            });
-
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AbstractBackgroundTaskService.class.getName()).log(Level.SEVERE, "cannot obtain progress UI component", ex);
-        } catch (ExecutionException ex) {
-            Logger.getLogger(AbstractBackgroundTaskService.class.getName()).log(Level.SEVERE, "cannot obtain progress UI component", ex.getCause());
-        }
     }
 
     protected Component createProgressComponent(String message) {
