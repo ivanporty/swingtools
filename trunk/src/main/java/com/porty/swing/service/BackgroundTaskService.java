@@ -4,6 +4,9 @@ import java.awt.Component;
 import javax.swing.SwingWorker;
 
 /**
+ * Service which takes background tasks, either as SwingWorker or Runnable instances, and
+ * executes them in consistent manner, potentially providing additional UI helper methods to show and
+ * hide components, progress component etc.
  *
  * @author iportyankin
  */

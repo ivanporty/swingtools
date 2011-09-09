@@ -3,7 +3,7 @@ package com.porty.swing.table;
 import java.util.Date;
 
 /**
- * Java bean with a lot of fields of various types for testing dynamic tables.
+ * Java bean with a lot of fields of various types for testing dynamic tables performance.
  * 
  * @author iportyankin
  */

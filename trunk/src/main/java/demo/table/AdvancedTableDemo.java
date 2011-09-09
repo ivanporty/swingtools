@@ -1,7 +1,7 @@
 package demo.table;
 
 import com.porty.swing.table.BaseTable;
-import com.porty.swing.table.BeanPropertyTableModel;
+import com.porty.swing.table.model.BeanPropertyTableModel;
 import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;

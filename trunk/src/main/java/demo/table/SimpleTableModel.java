@@ -1,5 +1,5 @@
 
-package com.porty.swing.table;
+package demo.table;
 
 import java.util.ArrayList;
 import java.util.List;
