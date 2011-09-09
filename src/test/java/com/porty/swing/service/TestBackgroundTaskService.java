@@ -62,6 +62,11 @@ public class TestBackgroundTaskService extends TestCase {
         Pause.pause(5000);
     }
 
+    @Override
+    protected void tearDown() throws Exception {
+        frameFixture.cleanUp();
+    }
+
     class TestFrame extends JFrame {
 
         TestFrame() {

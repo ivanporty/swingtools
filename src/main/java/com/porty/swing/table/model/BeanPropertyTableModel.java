@@ -1,4 +1,4 @@
-package com.porty.swing.table;
+package com.porty.swing.table.model;
 
 import com.porty.swing.util.DynamicBeanUtils;
 import java.beans.BeanInfo;
