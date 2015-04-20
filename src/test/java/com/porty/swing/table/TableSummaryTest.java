@@ -16,7 +16,10 @@ import org.fest.swing.timing.Pause;
 
 /**
  * Tests construction of dynamic tables based on data class.
+ * This tests require UI and uses FEST to manipulate Swing components and data.
+ * 
  * @author iportyankin
+ * @version 1.1
  */
 public class TableSummaryTest extends TestCase {
 
