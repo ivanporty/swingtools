@@ -15,4 +15,4 @@ Difference from SwingX or JIDE or other component libraries:
 * Almost no custom painting or components - mostly effective algorithms and techniques under the same widely used components like JXTree
 * Small, focused, driven off the blog and described problems
 
-Pretty long time ago!
+* Pretty long time ago!
